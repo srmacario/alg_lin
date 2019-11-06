@@ -67,6 +67,12 @@ $ a = 0 $, como o vetor: $f_{o} = \begin{pmatrix} 1,&-1,&1,&-1\end{pmatrix}$. Em
 Essa interessante observação nos permite expandir o raciocínio para resolver o problema de desperdício de energia. Note que se um vetor $g$ pertence ao núcleo de $C_{\alpha}$, então qualquer combinação de vetores $f$ que inclua $g$
 produz a mesma aceleração que $f - g$, pois:\\
 \\  $ a = C_{\alpha}(f) = C_{\alpha}(f-g) + C_{\alpha}(g) = C_{\alpha}(f-g)$
+\\ \\
+Considerando o nosso robô com quatro rodas, podemos facilmente calcular o núcleo da matriz $C_{\alpha}$, que é 3.
+Aplicando o teorema do posto-nulidade para $C_{\alpha}$, temos:
+\\  \\ $ RanK(C_{\alpha}) + Ker(C_{\alpha}) = Dim(coluna)$ \\ \\
+Daí tiramos que $Ker(C_{\alpha}) = 1 $, e portanto qualquer vetor no núcleo de $C_{\alpha}$ é da forma $\lambda f_{k}$
+
 \section{Conclusão}
 
 \end{document}documentclass{article}
