@@ -1,0 +1,95 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\renewcommand*\contentsname{Sumário}
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+
+        \includegraphics[width=0.4\textwidth]{ime.jpg}
+
+        \vspace{1cm}
+
+        \Huge
+        \textbf{Otimização de sistemas de robôs com rodas omnidirecionais}
+ 
+        \vspace{0.5cm}
+        \LARGE
+        Um estudo de Álgebra Linear
+ 
+        \vspace{1.5cm}
+ 
+        Alexandre Pereira de Freitas\\
+        Lucas Rafael de Aguiar Silva\\
+        Samuel Morais Barros\\
+        Sérgio Reinier Sousa Macário\\
+        Vinícius de Freitas Lima Moraes\\
+ 
+        \vfill
+ 
+        \vspace{0.8cm}
+ 
+        \Large
+        08/11/2019
+ 
+    \end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Introdução}
+
+\section{Enunciado do problema}
+\subsection{Deslizamento de Rodas}
+
+Considere um robô simétrico, com m = $\begin{pmatrix}v_{1},&v_{2},&v_{3},&v_{4} \end{pmatrix}^T$ indicando a velocidade tangencial dos motores,
+D a matriz de velocidades, e v um vetor tridimensional $\begin{pmatrix} v_{x},&v_{y},&Rw \end{pmatrix}^T$.
+Dado isso, teste a inconsistência da velocidade dos motores e, consequentemente, se há rodas deslizando.
+
+\subsection{Economia de Energia}
+
+Considerando o resultado do problema anterior, ou seja, caso seja detectado inconsistência com os motores e alguma das rodas esteja deslizando.
+É possível corrigir rapidamente esse problema sem alterar a configuração física do robô (número de motores, número de rodas etc.)? Se sim proponha uma solução adequada.
+
+\section{Resolução do problema}
+\subsection{Item 1}
+\subsection{Item 2}
+Para identificarmos uma possível perda ou desperdício de energia precisamos identificar como funciona o vetor aceleração do robô, dado por: 
+$ a = C_{\alpha}f_{k}$ Partindo desse ponto, é fácil notar que existem combinações de forças dos motores que geram uma aceleração nula:
+$ a = 0 $, como o vetor: $f_{o} = \begin{pmatrix} 1,&-1,&1,&-1\end{pmatrix}$. Em outras palavras, o vetor $f_{o}$ pertence ao núcleo de $C_{\alpha}$.
+\\ \\
+Essa interessante observação nos permite expandir o raciocínio para resolver o problema de desperdício de energia. Note que se um vetor $g$ pertence ao núcleo de $C_{\alpha}$, então qualquer combinação de vetores $f$ que inclua $g$
+produz a mesma aceleração que $f - g$, pois:\\
+\\  $ a = C_{\alpha}(f) = C_{\alpha}(f-g) + C_{\alpha}(g) = C_{\alpha}(f-g)$
+\section{Conclusão}
+
+\end{document}documentclass{article}
+
+\usepackage{grapicx}
+\usepackage[utf8]{inputenc}
+
+\renewcommand*\contentsname{Sumário}
+\begin{document}
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{ime.jpg}
+\end{figure}
+
+\tableofcontents
+\newpage
+
+\section{Introdução}
+
+\section{Discussão do Problema}
+
+\section{Resolução do Problema}
+
+\section{Conclusão}
+
+\end{document}
