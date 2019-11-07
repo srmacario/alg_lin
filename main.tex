@@ -96,7 +96,19 @@ produz a mesma aceleração que $f - g$, pois:\\
 \\ \\
 Como calculado anteriormente na seção 3.1, $dim(C_{alpha}) = 3$, daí, aplicando o teorema do posto-nulidade para $C_{\alpha}$, temos:
 \\  \\ $ Rank(C_{\alpha}) + Ker(C_{\alpha}) = Dim(coluna)$ \\ \\
-Daí tiramos que $Ker(C_{\alpha}) = 1 $, e portanto qualquer vetor no núcleo de $C_{\alpha}$ é da forma $\lambda f_{k}$
+Daí tiramos que $Ker(C_{\alpha}) = 1 $, e portanto qualquer vetor no núcleo de $C_{\alpha}$ é da forma $\lambda f_{k}$.
+\\ O fato interessante de se notar é que primeiro, testamos as validades das velocidades através da equação: $(I-DD^+)m = 0$
+e agora, concluímos que qualquer vetor no núcleo de $C_{\alpha}$ gera uma aceleração nula no robô. Podemos estreitar ainda mais essa relação,
+se usarmos o conceito de operador de projeção ortogonal:
+\\ \\ As matrizes $DD^+ e D^+D$ são operadores de projeção ortogonal, $P$ , ou seja, são hermitianos ($P = P^*$), por definição, e são idempotentes
+($P^2 = P$). Daí, as seguintes propriedades se seguem:
+\\ $DD^+$ é o operador de projeção ortogonal na $Im(D)$, e por consequência, $I - DD^+$ é o operador de projeção ortogonal em $ker(A)$.
+\\ \\ Se analisarmos as matrizes $C_{\alpha}$ e $D$, podemos notar que $C_{\alpha} = (1/{\alpha}M)(D^T)$, como nossas matrizes estão no corpo dos $R$, sabemos que $D^T = D^*$,
+então podemos ver que $C_{\alpha}$ é a matriz adjunta de $D$ multiplicada por uma constante!
+\\ Então, se quisermos corrigir o deslizamento de velocidades, verificando a consistência da equação $(I-DD^+)m = 0$, basta vermos que o operador $(I - DD^+)$ projeta $m$ no $ker(D^*)$,
+logo a relação que queremos manter válida é que $m$ seja \textbf{ortogonal} ao vetor que compõem a base do $ker(C_{\alpha})$.
+\\ \\ Correção:
+
 
 \section{Conclusão}
 
