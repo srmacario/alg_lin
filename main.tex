@@ -4,6 +4,7 @@
 \usepackage{subcaption}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
+\usepackage{float}
 
 \renewcommand*\contentsname{Sumário}
 \begin{document}
@@ -43,6 +44,90 @@
 \newpage
 
 \section{Introdução}
+\subsection{Constituição dos robôs com rodas omnidirecionais}
+
+Robôs com movimentação omnidirecional são máquinas capazes de se locomover em todas as direções e ângulos sem a necessidade de rotacionar o seu corpo antes de executar a translação. As peças especiais que permitem isso são as omnirodas, rodas constituídas por várias rodas menores perpendiculares em relação ao plano da roda maior encaixadas ao longo de sua periféria, conforme a figura 1 a seguir:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{ime.jpg}
+\caption{Legenda}
+\label{Rotulo}
+\end{figure}
+
+O princípio de funcionamento dos robôs com omnirodas constitui-se do fato de que, enquanto a roda principal provê tração na direção normal ao eixo do motor, as rodas menores que constituem a roda principal permitem o deslizamento sem atrito (para um estudo ideal) na direção do eixo do motor.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{ime.jpg}
+\caption{Legenda}
+\label{Rotulo}
+\end{figure}
+
+
+Em geral, utiliza-se três ou quatro rodas omnidirecionais na fabricação de um robô, conforme a figura 2. A composição da tração de cada uma das rodas possibilita a translação e a rotação do robô. O ideal seria utilizar duas rodas omnidirecionais ortogonais, de tal forma que somente a translação fosse permitida, minimizando a complexidade do movimento. Porém, por questões espaciais e de estabilidade, esse arranjo é impossível. 
+Nesse ínterim, o ideal das rodas omnidirecionais constitui da busca pela situação na qual as n rodas omnidirecionais empregadas em um robô possibilitam a obtenção da maior velocidade pelo robô no sentido desejado.
+
+
+\subsection{Fundamentos Físicos}
+
+Para a compreensão do movimento, é necessário analisar tanto a translação quanto a rotação do sistema de acordo com a geometria do robô. Para isso, pode-se modelar o robô dotado de n rodas, tal que:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{ime.jpg}
+\caption{Legenda}
+\label{Rotulo}
+\end{figure}
+
+Para a translação, pode-se aplicar a 2º lei de Newton com relação ao centro do robô:
+\[\vec{F}_{resultante} = M\vec{a}_{resultante}\]
+\[\vec{a}=\frac{1}{M}\sum_{i=1}^{n}\vec{F}_i\]
+Observa-se, por decomposição vetorial, que:
+\[a_x=-\frac{1}{M}\sum_{i=1}^{n}F_i\sin\theta_i \text{ (I)}  \]     
+\[a_y=\frac{1}{M}\sum_{i=1}^{n}F_i\cos\theta_i \text{ (II)}\]	
+Para a rotação, deve-se analisar o torque resultante:
+\[\tau_{resultante}=I\dot{\omega}\]
+\[\dot{\omega}=\frac{R}{I}\sum_{i=1}^{n}F_i \text{ (III)}\]
+O momento de inércia de uma distribuição de massa qualquer pode ser representado por:
+\[I=\alpha MR^2\text{ , com } 0\leq\alpha\leq1\]
+Desse modo, pode-se simplificar as equações (I), (II) e (III) pela seguinte identidade matricial:
+\[
+\begin{pmatrix}a_{x}\\a_{y}\\R\dot{\omega} \end{pmatrix}
+=\frac{1}{M}
+\begin{pmatrix}
+  -\sin\theta_1 & -\sin\theta_2 & \cdots & -\sin\theta_n \\
+  \cos\theta_1 & \cos\theta_2 & \cdots & \cos\theta_n \\
+  \frac{1}{\alpha} & \frac{1}{\alpha} &\cdots & \frac{1}{\alpha}
+ \end{pmatrix}
+\]
+Denomina-se a matrix $3 \times n$ da equação acima de matriz de acoplamento de forças, e representa-se por \( C_\alpha \). \\
+Pode-se obter a velocidade final de cada roda bem como a velocidade linear e angular do robô integrando a equação matricial (IV). Porém, é mais interessante analisar a situação em que o robô se apresenta em um espaço Euclidiano, obter a trajetória e, a partir daí, derivar a velocidade de cada roda individualmente.\\
+Agrupando as velocidades individuais proporcionadas por cada motor na matriz $m=\begin{pmatrix}v_{1},v_{2},v_{3},v_{4} \end{pmatrix}^T$ e as velocidades euclidianas e a velocidade de rotação do robô na matriz  $v=\begin{pmatrix}v_{1},v_{2},v_{3},v_{4} \end{pmatrix}^T$, nota-se que o movimento das rodas se decompõem em componentes translacionais e rotacionais, segundo a geometria do robô. Nesse panorama, a seguinte equação representa a relação entre a velocidade dos motores individualmente e a velocidades resultantes no robô.
+\[
+\begin{pmatrix}v_{1}\\ \vdots \\ v_{n} \end{pmatrix}
+=
+\begin{pmatrix}
+  -\sin\theta_1 & \cos\theta_1  & \cdots & 1 \\
+  \vdots & \vdots & \cdots  \\
+  -\sin\theta_n & \cos\theta_n  &\cdots & 1
+ \end{pmatrix}
+\]
+\[
+\begin{pmatrix}v_{x}\\ v_y \\ R\omega \end{pmatrix}
+\]
+A matriz envolvida no produto matricial acima, bastante semelhante à matriz $C_\alpha$, é chamada matriz de acoplamento de velocidade, e será denotada por D.
+Assim, sendo a aceleração do robô representada pelo vetor $a=\begin{pmatrix}v_{1},v_{2},v_{3},v_{4} \end{pmatrix}^T$ e a magnitude (módulo) das forças representada por $f=\begin{pmatrix}v_{1},v_{2},v_{3},v_{4} \end{pmatrix}^T$, podem ser constituídas as seguintes igualdades:
+\[a=C_{\alpha}f\]
+\[m=Dv\]
+Integrando em função de um intervalo de tempo $\Delta t$, obtém-se que $\Delta v=\Delta t \times a$. Assim,
+\[\Delta m=\Delta t\times DC_{\alpha}f\]
+Os motores possuem um mecanismo que permite a medição da velocidade das rodas em tempo real. Com o fim de controlar o robô, é necessário conhecer o comportamento da matriz v, isto é, é necessário construir uma transformação linear que mapeie os elementos do subespaço gerado pela matriz m nos elementos do subespaço gerado pela matriz v.
+Para tal, é necessário inverter a matriz m=Dv. Em geral, isso não é possível por a matriz D não ser quadrada e, portanto, não ser invertível. Porém, pode-se utilizar uma matriz pseudo-inversa pela esquerda, denominada $D^+$, tal que $D^+ D=I_n$. Nota-se, ainda, que $DD^+$ não representa um produto matricial. Nesse ínterim, 
+\[D^+m=(D^+D)v=Iv\]
+\[v-D^+m\]
+
+
 
 \section{Enunciado do problema}
 \subsection{Deslizamento de Rodas}
