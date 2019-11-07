@@ -16,7 +16,7 @@
         \vspace{1cm}
 
         \Huge
-        \textbf{Álgebra Linear na Construção da Arquitetura de Conomo com Roda}
+        \textbf{Álgebra Linear na Construção da Arquitetura de Controle de Robôs Autônomos com Rodas Omnidirecionais}
  
         \vspace{0.5cm}
         \LARGE
@@ -47,8 +47,8 @@
 \section{Enunciado do problema}
 \subsection{Deslizamento de Rodas}
 
-Considere um robô simétrico, com m = $\begin{pmatrix}v_{1},&v_{2},&v_{3},&v_{4} \end{pmatrix}^T$ indicando a velocidade tangencial dos motores,
-D a matriz de velocidades, e v um vetor tridimensional $\begin{pmatrix} v_{x},&v_{y},&Rw \end{pmatrix}^T$.
+Considere um robô simétrico, com m = $\begin{pmatrix}v_{1},v_{2},v_{3},v_{4} \end{pmatrix}^T$ indicando a velocidade tangencial dos motores,
+D a matriz de velocidades, e v um vetor tridimensional $\begin{pmatrix} v_{x},v_{y},Rw \end{pmatrix}^T$.
 Dado isso, teste a inconsistência da velocidade dos motores e, consequentemente, se há rodas deslizando.
 
 \subsection{Economia de Energia}
@@ -58,17 +58,20 @@ Considerando o resultado do problema anterior, ou seja, caso seja detectado inco
 
 \section{Resolução do problema}
 \subsection{Item 1}
+
+Consideremos o robô da figura, no qual os ângulos das rodas superiores são $\alpha$ e os da inferiores são $\beta$, o vetor $m = \begin{pmatrix} v1,v2,v3,v4 \end{pmatrix}^T$ representa
+as velocidades tangenciais dos motores e o vetor $v = \begin{pmatrix} v_{x},v_{y},Rw \end{pmatrix}^T$ a velocidade total do robô (translacional e rotacional).
+
 \subsection{Item 2}
 Para identificarmos uma possível perda ou desperdício de energia precisamos identificar como funciona o vetor aceleração do robô, dado por: 
 $ a = C_{\alpha}f_{k}$ Partindo desse ponto, é fácil notar que existem combinações de forças dos motores que geram uma aceleração nula:
-$ a = 0 $, como o vetor: $f_{o} = \begin{pmatrix} 1,&-1,&1,&-1\end{pmatrix}$. Em outras palavras, o vetor $f_{o}$ pertence ao núcleo de $C_{\alpha}$.
+$ a = 0 $, como o vetor: $f_{o} = \begin{pmatrix} 1,-1,1,-1\end{pmatrix}$. Em outras palavras, o vetor $f_{o}$ pertence ao núcleo de $C_{\alpha}$.
 \\ \\
 Essa interessante observação nos permite expandir o raciocínio para resolver o problema de desperdício de energia. Note que se um vetor $g$ pertence ao núcleo de $C_{\alpha}$, então qualquer combinação de vetores $f$ que inclua $g$
 produz a mesma aceleração que $f - g$, pois:\\
 \\  $ a = C_{\alpha}(f) = C_{\alpha}(f-g) + C_{\alpha}(g) = C_{\alpha}(f-g)$
 \\ \\
-Como calculado anteriormente na seção 3.1, a dimensão
-Aplicando o teorema do posto-nulidade para $C_{\alpha}$, temos:
+Como calculado anteriormente na seção 3.1, $dim(C_{alpha}) = 3$, daí, aplicando o teorema do posto-nulidade para $C_{\alpha}$, temos:
 \\  \\ $ Rank(C_{\alpha}) + Ker(C_{\alpha}) = Dim(coluna)$ \\ \\
 Daí tiramos que $Ker(C_{\alpha}) = 1 $, e portanto qualquer vetor no núcleo de $C_{\alpha}$ é da forma $\lambda f_{k}$
 
