@@ -109,6 +109,14 @@ então podemos ver que $C_{\alpha}$ é a matriz adjunta de $D$ multiplicada por 
 logo a relação que queremos manter válida é que $m$ seja \textbf{ortogonal} ao vetor que compõem a base do $ker(C_{\alpha})$.
 \\ \\ Correção:
 
+Podemos visualizar a correção de deslizamento, identificando o espaço vetorial da transformação $(I - DD^+)$.
+Nesse espaço, de dimensão = 4, existe um subespaço tridimensional de valores consistentes, ou seja, que não deslizam. Ortogonalmente à esse subespaço,
+possuímos o vetor $f_{k}$, sempre que as rodas estão deslizando, estamos gastando energia, pois o vetor das velocidades contém uma componente na direção $f_{k}$.
+Daí, a nossa correção para velocidades inconsistentes gera, consequentemente, uma economia de energia para o sistema do robô.
+\\ \\ Além disso, quando mapeamos as acelerações Euclidianas $a$ com as forças dos motores $f$, sempre obtemos resultados consistentes, através da expressaõ:
+\\ $f = C_{\alpha}^+a$
+\\ Veja que $rank(C_{\alpha}) = 3$, então pelo teorema do posto-nulidade temos que: $ker(C_{\alpha}) = 0$. $C_{\alpha}$, portanto, mapeia as acelerações $a$  em $f$ (subespaço de 3 dimensões).
+Se esse espaço possuísse algum elemento $u$ do núcleo de $C_{\alpha}$, então deveria existir uma aceleração $a$, diferente de 0, tal que $u = C_{\alpha}^+a$. Como vimos anteriormente que $c_ {\alpha}u = a = 0$, chegaríamos a um absurdo.
 
 \section{Conclusão}
 
