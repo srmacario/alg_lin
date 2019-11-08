@@ -279,10 +279,10 @@ Podemos visualizar a correção de deslizamento da seguinte maneira: o espaço v
 
 Daí, a nossa correção para velocidades inconsistentes gera, consequentemente, uma economia de energia para o sistema do robô.
 
-Além disso, quando mapeamos as acelerações Euclidianas $a$ com as forças dos motores $f$, sempre obtemos resultados consistentes, através da expressaõ:
+Além disso, quando mapeamos as acelerações Euclidianas $a$ com as forças dos motores $f$, sempre obtemos resultados consistentes, através da expressão:
 \[f = C_{\alpha}^+a\]
 
-Veja que $rank(C_{\alpha}) = 3$, então pelo teorema do posto-nulidade temos que: $ker(C_{\alpha}) = 0$. $C_{\alpha}$, portanto, mapeia as acelerações $a$  em $f$ (subespaço de 3 dimensões). Se esse espaço possuísse algum elemento $u$ do núcleo de $C_{\alpha}$, então deveria existir uma aceleração $a$, diferente de 0, tal que $u = C_{\alpha}^+a$. Como vimos anteriormente que $c_ {\alpha}u = a = 0$, chegaríamos a um absurdo.
+Veja que $rank(C_{\alpha}) = 3$, então pelo teorema do posto-nulidade temos que: $ker(C_{\alpha}) = 0$. $C_{\alpha}$, portanto, mapeia as acelerações $a$  em $f$ com uma bijeção (subespaço de dimensão 3). Se esse espaço possuísse algum elemento $u$ do núcleo de $C_{\alpha}$, então deveria existir uma aceleração $a$, diferente de 0, tal que $u = C_{\alpha}^+a$. Como vimos anteriormente que $c_ {\alpha}u = a = 0$, chegaríamos a um absurdo.
 
 
 \end{document}documentclass{article}
