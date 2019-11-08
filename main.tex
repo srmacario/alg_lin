@@ -153,7 +153,7 @@ Para tal, é necessário inverter a matriz $m=Dv$. Em geral, isso não é possí
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.4\textwidth]{sanhaço.jpg}
+\includegraphics[width=0.4\textwidth]{sanhaco.jpg}
 \caption{Geometria das rodas}
 \label{Figura 1}
 \end{figure}
@@ -271,9 +271,11 @@ Então, concluimos que a transformação $(I-DD^+)$ projeta $m$ no $ker(D^*)$. A
 
 \subsection{Correção do deslizamento}
 
-\hspace{1cm} Do que foi mostrado anteriormente, concluimos também que as velocidades dos motores são inconsistentes se existe uma projeção de $m$ na direção do vetor $f_k$ , que é base do espaço nulo de $C_{\alpha}$. Por tanto, para corrigir o deslizamento, nós calcularemos a projeção de $m$ na direção do vetor unitário $\frac{1}{2}f_k$ e subtrairemos essa projeção de $m$.
+\hspace{1cm} Do que foi mostrado anteriormente, concluimos também que as velocidades dos motores são inconsistentes se existe uma projeção de $m$ na direção do vetor $f_o$ , que é base do espaço nulo de $C_{\alpha}$. Por tanto, para corrigir o deslizamento, nós calcularemos a projeção de $m$ na direção do vetor unitário na direção de $f_{o}$ e subtrairemos essa projeção de $m$.
 
 Podemos visualizar a correção de deslizamento da seguinte maneira: o espaço vetorial de $m$ tem $\text{dimensão}= 4$. nesse espaço, existe um subespaço tridimensional (um hyperplano tridimensional) de valores consistentes, ou seja, que não deslizam. Ortogonalmente à esse subespaço ,possuímos o vetor $f_{k}$. Sempre que as rodas estão deslizando, estamos gastando energia, pois o vetor das velocidades contém uma componente na direção $f_{k}$.
+
+\[m_{corrigido} = m - (m . f_{o})f_{o}\]
 
 Daí, a nossa correção para velocidades inconsistentes gera, consequentemente, uma economia de energia para o sistema do robô.
 
