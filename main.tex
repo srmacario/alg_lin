@@ -158,7 +158,6 @@ Para tal, é necessário inverter a matriz $m=Dv$. Em geral, isso não é possí
 \caption{Geometria das rodas}
 \label{Figura 1}
 \end{figure}
-%%%%%%%%%%%%%%%%%%
 
 Tem se que $m=\begin{pmatrix}v_{1},v_{2},v_{3},v_{4} \end{pmatrix}^T$ é o vetor em $\bkRsf^4$ da velocidade tangencial dos motores, $D$ é a matriz de acoplamento de velocidade, e $v$  é um vetor tridimensional $\begin{pmatrix}v_{x},v_{y},R{\omega}\ \end{pmatrix}^T$.
 Dado a modelagem matemática do movimento do robô, discuta como um algoritmo pode ser criado para a identificação de velocidades inconsistentes entre os motores. Em outras palavras, crie um método para identificar o  deslizamento nas rodas do robô.
@@ -253,7 +252,7 @@ Logo, se essa relação \textbf{não} for válida, teremos identificado que há 
  \end{pmatrix}
 \]
 
-Partindo desse ponto, é fácil notar que existem combinações de forças dos motores que geram uma aceleração nula: $ a = 0 $. Temos como exemplo o vetor: $f_{o} = \begin{pmatrix} -\sqrt{\frac{2}{3}},\sqrt{\frac{2}{3}},-1,1\end{pmatrix}$. Em outras palavras, o vetor $f_{o}$ pertence ao núcleo de $C_{\alpha}$.
+Partindo desse ponto, é fácil notar que existem combinações de forças dos motores que geram uma aceleração nula: $ a = 0 $. Temos como exemplo o vetor: $f_{o} = \begin{pmatrix} -\sqrt{\frac{2}{3}},\sqrt{\frac{2}{3}},-1,1\end{pmatrix}^T$. Em outras palavras, o vetor $f_{o}$ pertence ao núcleo de $C_{\alpha}$.
 
 Essa interessante observação nos permite expandir o raciocínio para resolver o problema de desperdício de energia. Note que se um vetor $g$ pertence ao núcleo de $C_{\alpha}$, então qualquer combinação de vetores $f$ que inclua $g$ produz a mesma aceleração que $f - g$, pois:
 \[ a = C_{\alpha}(f) = C_{\alpha}(f-g) + C_{\alpha}(g) = C_{\alpha}(f-g)\]
@@ -278,18 +277,18 @@ Então, concluimos que a transformação $(I-DD^+)$ projeta $m$ no $ker(D^*)$. A
 
 \subsection{Correção do deslizamento}
 
-\hspace{1cm} Do que foi mostrado anteriormente, concluimos também que as velocidades dos motores são inconsistentes se existe uma projeção de $m$ na direção do vetor $f_o$ , que é base do espaço nulo de $C_{\alpha}$. Por tanto, para corrigir o deslizamento, nós calcularemos a projeção de $m$ na direção do vetor unitário na direção de $f_{o}$ e subtrairemos essa projeção de $m$.
+\hspace{1cm} Do que foi mostrado anteriormente, concluimos também que as velocidades dos motores são inconsistentes se existe uma projeção de $m$ na direção do vetor $f_{o}$, que é base do espaço nulo de $C_{\alpha}$. Portanto, para corrigir o deslizamento, nós calcularemos a projeção de $m$ na direção do vetor unitário na direção de $f_{o}$ e subtrairemos essa projeção de $m$.
 
-Podemos visualizar a correção de deslizamento da seguinte maneira: o espaço vetorial de $m$ tem $\text{dimensão}= 4$. nesse espaço, existe um subespaço tridimensional (um hyperplano tridimensional) de valores consistentes, ou seja, que não deslizam. Ortogonalmente à esse subespaço ,possuímos o vetor $f_{k}$. Sempre que as rodas estão deslizando, estamos gastando energia, pois o vetor das velocidades contém uma componente na direção $f_{k}$.
+\[m_{corrigido} = m - (m . f_{o}^")f_{o}^" \text{ ,  onde } f_{o}^" \text{é o vetor unitário na direção de }f_{o} \]
 
-\[m_{corrigido} = m - (m . f_{o})f_{o}\]
+Podemos visualizar a correção de deslizamento da seguinte maneira: o espaço vetorial de $m$ tem $\text{dimensão}= 4$. Nesse espaço, existe um subespaço tridimensional (um hiperplano tridimensional) de valores consistentes, ou seja, que não deslizam. Ortogonalmente à esse subespaço, possuímos o vetor $f_{o}$. Sempre que as rodas estão deslizando, estamos gastando energia, pois o vetor das velocidades contém uma componente na direção $f_{o}$.
 
 Daí, a nossa correção para velocidades inconsistentes gera, consequentemente, uma economia de energia para o sistema do robô.
 
-Além disso, quando mapeamos as acelerações Euclidianas $a$ com as forças dos motores $f$, sempre obtemos resultados consistentes, através da expressaõ:
+Além disso, quando mapeamos as acelerações Euclidianas $a$ com as forças dos motores $f$, sempre obtemos resultados consistentes, através da expressão:
 \[f = C_{\alpha}^+a\]
 
-Veja que $rank(C_{\alpha}) = 3$, então pelo teorema do posto-nulidade temos que: $ker(C_{\alpha}) = 0$. $C_{\alpha}$, portanto, mapeia as acelerações $a$  em $f$ (subespaço de 3 dimensões). Se esse espaço possuísse algum elemento $u$ do núcleo de $C_{\alpha}$, então deveria existir uma aceleração $a$, diferente de 0, tal que $u = C_{\alpha}^+a$. Como vimos anteriormente que $c_ {\alpha}u = a = 0$, chegaríamos a um absurdo.
+Veja que $rank(C_{\alpha}) = 3$, então pelo teorema do posto-nulidade temos que: $ker(C_{\alpha}) = 0$. $C_{\alpha}$, portanto, mapeia as acelerações $a$  em $f$ com uma bijeção (subespaço de dimensão 3). Se esse espaço possuísse algum elemento $u$ do núcleo de $C_{\alpha}$, então deveria existir uma aceleração $a$, diferente de 0, tal que $u = C_{\alpha}^+a$. Como vimos anteriormente que $c_ {\alpha}u = a = 0$, chegaríamos a um absurdo.
 
 
 \end{document}documentclass{article}
