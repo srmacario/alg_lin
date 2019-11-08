@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{float}
+\setlength{\parindent}{3em}
 
 \renewcommand*\contentsname{Sumário}
 \begin{document}
@@ -46,12 +47,12 @@
 \section{Introdução}
 \subsection{Constituição dos robôs com rodas omnidirecionais}
 
-Robôs com movimentação omnidirecional são máquinas capazes de se locomover em todas as direções e ângulos sem a necessidade de rotacionar o seu corpo antes de executar a translação. As peças especiais que permitem isso são as omnirodas, rodas constituídas por várias rodas menores perpendiculares em relação ao plano da roda maior encaixadas ao longo de sua periféria, conforme a figura 1 a seguir:
+\hspace{1cm}Robôs com movimentação omnidirecional são máquinas capazes de se locomover em todas as direções e ângulos sem a necessidade de rotacionar o seu corpo antes de executar a translação. As peças especiais que permitem isso são as omnirodas, rodas constituídas por várias rodas menores perpendiculares em relação ao plano da roda maior encaixadas ao longo de sua periféria, conforme a figura 1 a seguir:
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.4\textwidth]{ime.jpg}
-\caption{Legenda}
+\includegraphics[width=0.4\textwidth]{omniroda.jpeg}
+\caption{Omniroda}
 \label{Rotulo}
 \end{figure}
 
@@ -59,39 +60,39 @@ O princípio de funcionamento dos robôs com omnirodas constitui-se do fato de q
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.4\textwidth]{ime.jpg}
-\caption{Legenda}
+\includegraphics[width=0.4\textwidth]{robo.jpeg}
+\caption{Robô com rodas omnidirecionais}
 \label{Rotulo}
 \end{figure}
 
 
 Em geral, utiliza-se três ou quatro rodas omnidirecionais na fabricação de um robô, conforme a figura 2. A composição da tração de cada uma das rodas possibilita a translação e a rotação do robô. O ideal seria utilizar duas rodas omnidirecionais ortogonais, de tal forma que somente a translação fosse permitida, minimizando a complexidade do movimento. Porém, por questões espaciais e de estabilidade, esse arranjo é impossível. 
-Nesse ínterim, o ideal das rodas omnidirecionais constitui da busca pela situação na qual as n rodas omnidirecionais empregadas em um robô possibilitam a obtenção da maior velocidade pelo robô no sentido desejado.
+Nesse ínterim, o ideal das rodas omnidirecionais constitui da busca pela situação na qual as $n$ rodas empregadas em um robô possibilitam a obtenção da maior velocidade pelo robô com a maior eficiência energética no sentido desejado.
 
 
 \subsection{Fundamentos Físicos}
 
-Para a compreensão do movimento, é necessário analisar tanto a translação quanto a rotação do sistema de acordo com a geometria do robô. Para isso, pode-se modelar o robô dotado de n rodas, tal que:
+\hspace{1cm}Para a compreensão do movimento, é necessário analisar tanto a translação quanto a rotação do sistema de acordo com a geometria do robô. Para isso, pode-se modelar o robô dotado de $n$ rodas, tal que:
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.4\textwidth]{ime.jpg}
-\caption{Legenda}
+\includegraphics[width=0.4\textwidth]{roda.jpeg}
+\caption{Arranjo de $n$ rodas e as aplicadas forças correspondente}
 \label{Rotulo}
 \end{figure}
 
 Para a translação, pode-se aplicar a 2º lei de Newton com relação ao centro do robô:
 \[\vec{F}_{resultante} = M\vec{a}_{resultante}\]
 \[\vec{a}=\frac{1}{M}\sum_{i=1}^{n}\vec{F}_i\]
-Observa-se, por decomposição vetorial, que:
+\hspace{1cm}Observa-se, por decomposição vetorial, que:
 \[a_x=-\frac{1}{M}\sum_{i=1}^{n}F_i\sin\theta_i \text{ (I)}  \]     
 \[a_y=\frac{1}{M}\sum_{i=1}^{n}F_i\cos\theta_i \text{ (II)}\]	
-Para a rotação, deve-se analisar o torque resultante:
+\hspace{1cm}Para a rotação, deve-se analisar o torque resultante:
 \[\tau_{resultante}=I\dot{\omega}\]
 \[\dot{\omega}=\frac{R}{I}\sum_{i=1}^{n}F_i \text{ (III)}\]
-O momento de inércia de uma distribuição de massa qualquer pode ser representado por:
+\hspace{1cm}O momento de inércia de uma distribuição de massa qualquer pode ser representado por:
 \[I=\alpha MR^2\text{ , com } 0\leq\alpha\leq1\]
-Desse modo, pode-se simplificar as equações (I), (II) e (III) pela seguinte identidade matricial:
+\hspace{1cm}Desse modo, pode-se simplificar as equações (I), (II) e (III) pela seguinte identidade matricial:
 \[
 \begin{pmatrix}a_{x}\\a_{y}\\R\dot{\omega} \end{pmatrix}
 =\frac{1}{M}
@@ -100,107 +101,106 @@ Desse modo, pode-se simplificar as equações (I), (II) e (III) pela seguinte id
   \cos\theta_1 & \cos\theta_2 & \cdots & \cos\theta_n \\
   \frac{1}{\alpha} & \frac{1}{\alpha} &\cdots & \frac{1}{\alpha}
  \end{pmatrix}
+\begin{pmatrix}F_{1}\\ \vdots \\ F_{n} \end{pmatrix} \text{ (IV)}
 \]
-Denomina-se a matrix $3 \times n$ da equação acima de matriz de acoplamento de forças, e representa-se por \( C_\alpha \). \\
-Pode-se obter a velocidade final de cada roda bem como a velocidade linear e angular do robô integrando a equação matricial (IV). Porém, é mais interessante analisar a situação em que o robô se apresenta em um espaço Euclidiano, obter a trajetória e, a partir daí, derivar a velocidade de cada roda individualmente.\\
-Agrupando as velocidades individuais proporcionadas por cada motor na matriz $m=\begin{pmatrix}v_{1},v_{2},v_{3},v_{4} \end{pmatrix}^T$ e as velocidades euclidianas e a velocidade de rotação do robô na matriz  $v=\begin{pmatrix}v_{1},v_{2},v_{3},v_{4} \end{pmatrix}^T$, nota-se que o movimento das rodas se decompõem em componentes translacionais e rotacionais, segundo a geometria do robô. Nesse panorama, a seguinte equação representa a relação entre a velocidade dos motores individualmente e a velocidades resultantes no robô.
+\hspace{1cm}Denomina-se a matrix $3 \times n$ da equação acima de matriz de acoplamento de forças, e representa-se por \( C_\alpha \). \\
+\hspace{1cm}Pode-se obter a velocidade final de cada roda bem como a velocidade linear e angular do robô integrando a equação matricial (IV). Porém, é mais interessante analisar a situação em que o robô se apresenta em um espaço Euclidiano, obter a trajetória e, a partir daí, derivar a velocidade de cada roda individualmente.\\
+\hspace{1cm}Agrupando as velocidades individuais proporcionadas por cada motor na matriz $m=\bigl(\begin{smallmatrix}v_{1}&\cdots&v_{n} \end{smallmatrix})^T$ e as velocidades euclidianas e a velocidade de rotação do robô na matriz  $v=\bigl(\begin{smallmatrix}v_{x}&v_{y}&R{\omega}\ \end{smallmatrix})^T$, nota-se que o movimento das rodas se decompõem em componentes translacionais e rotacionais, segundo a geometria do robô. Nesse panorama, a seguinte equação representa a relação entre a velocidade dos motores individualmente e a velocidades resultantes no robô.
 \[
 \begin{pmatrix}v_{1}\\ \vdots \\ v_{n} \end{pmatrix}
 =
 \begin{pmatrix}
-  -\sin\theta_1 & \cos\theta_1  & \cdots & 1 \\
-  \vdots & \vdots & \cdots  \\
-  -\sin\theta_n & \cos\theta_n  &\cdots & 1
+  -\sin\theta_1 & \cos\theta_1  & 1 \\
+  \vdots & \vdots & \vdots  \\
+  -\sin\theta_n & \cos\theta_n  & 1
  \end{pmatrix}
-\]
-\[
 \begin{pmatrix}v_{x}\\ v_y \\ R\omega \end{pmatrix}
 \]
-A matriz envolvida no produto matricial acima, bastante semelhante à matriz $C_\alpha$, é chamada matriz de acoplamento de velocidade, e será denotada por D.
-Assim, sendo a aceleração do robô representada pelo vetor $a=\begin{pmatrix}v_{1},v_{2},v_{3},v_{4} \end{pmatrix}^T$ e a magnitude (módulo) das forças representada por $f=\begin{pmatrix}v_{1},v_{2},v_{3},v_{4} \end{pmatrix}^T$, podem ser constituídas as seguintes igualdades:
+A matriz envolvida no produto matricial acima, bastante semelhante à matriz $C_\alpha$, é chamada matriz de acoplamento de velocidade, e será denotada por $D$.
+\hspace{1cm}Assim, sendo a aceleração do robô representada pelo vetor $a=\bigl(\begin{smallmatrix}a_{x}&a_{y}&R\dot{\omega}\ \end{smallmatrix})^T$ e a magnitude (módulo) das forças representada por $f=\bigl(\begin{smallmatrix}f_{1}&f_{2}&\cdots&f_{n} \end{smallmatrix})^T$, podem ser constituídas as seguintes igualdades:
 \[a=C_{\alpha}f\]
 \[m=Dv\]
-Integrando em função de um intervalo de tempo $\Delta t$, obtém-se que $\Delta v=\Delta t \times a$. Assim,
+\hspace{1cm}Integrando em função de um intervalo de tempo $\Delta t$, obtém-se que $\Delta v=\Delta t \times a$. Assim,
 \[\Delta m=\Delta t\times DC_{\alpha}f\]
-Os motores possuem um mecanismo que permite a medição da velocidade das rodas em tempo real. Com o fim de controlar o robô, é necessário conhecer o comportamento da matriz v, isto é, é necessário construir uma transformação linear que mapeie os elementos do subespaço gerado pela matriz m nos elementos do subespaço gerado pela matriz v.
-Para tal, é necessário inverter a matriz m=Dv. Em geral, isso não é possível por a matriz D não ser quadrada e, portanto, não ser invertível. Porém, pode-se utilizar uma matriz pseudo-inversa pela esquerda, denominada $D^+$, tal que $D^+ D=I_n$. Nota-se, ainda, que $DD^+$ não representa um produto matricial. Nesse ínterim, 
+\hspace{1cm}Os motores possuem um mecanismo que permite a medição da velocidade das rodas em tempo real. Com o fim de controlar o robô, é necessário conhecer o comportamento da matriz $v$, isto é, é necessário construir uma transformação linear que mapeie os elementos do subespaço gerado pela matriz $m$ nos elementos do subespaço gerado pela matriz $v$.
+Para tal, é necessário inverter a matriz $m$$=$$D$$v$. Em geral, isso não é possível por a matriz $D$ não ser quadrada e, portanto, não ser invertível. Porém, pode-se utilizar uma matriz pseudo-inversa pela esquerda, denominada $D^+$, tal que $D^+ D=I_n$. Nota-se, ainda, que $DD^+$ não representa um produto matricial. Nesse ínterim, 
 \[D^+m=(D^+D)v=Iv\]
-\[v-D^+m\]
+\[v=D^+m\]
 
 
 
 \section{Enunciado do problema}
 \subsection{Deslizamento de Rodas}
 
-Considere um robô simétrico, com m = $\begin{pmatrix}v_{1},v_{2},v_{3},v_{4} \end{pmatrix}^T$ indicando a velocidade tangencial dos motores,
-D a matriz de velocidades, e v um vetor tridimensional $\begin{pmatrix} v_{x},v_{y},Rw \end{pmatrix}^T$.
+\hspace{1cm}Considere um robô simétrico, com $m=\bigl(\begin{smallmatrix}v_{1}&v_{2}&v_{3}&v_{4} \end{smallmatrix})^T$ indicando a velocidade tangencial dos motores,
+$D$ a matriz de velocidades, e $v$ um vetor tridimensional $\bigl(\begin{smallmatrix}v_{x}&v_{y}&R{\omega}\ \end{smallmatrix})^T$.
 Dado isso, teste a inconsistência da velocidade dos motores e, consequentemente, se há rodas deslizando.
 
 \subsection{Economia de Energia}
 
-Considerando o resultado do problema anterior, ou seja, caso seja detectado inconsistência com os motores e alguma das rodas esteja deslizando.
+\hspace{1cm}Considerando o resultado do problema anterior, ou seja, caso seja detectado inconsistência com os motores e alguma das rodas esteja deslizando.
 É possível corrigir rapidamente esse problema sem alterar a configuração física do robô (número de motores, número de rodas etc.)? Se sim proponha uma solução adequada.
 
 \section{Resolução do problema}
 \subsection{Item 1}
 
-Consideremos o robô da figura, no qual os ângulos das rodas superiores são $\alpha$ e os da inferiores são $\beta$, o vetor $m = \begin{pmatrix} v1,v2,v3,v4 \end{pmatrix}^T$ representa
+\hspace{1cm}Consideremos o robô da figura, no qual os ângulos das rodas superiores são $\alpha$ e os da inferiores são $\beta$, o vetor $m = \begin{pmatrix} v_{1},v2,v3,v4 \end{pmatrix}^T$ representa
 as velocidades tangenciais dos motores e o vetor $v = \begin{pmatrix} v_{x},v_{y},Rw \end{pmatrix}^T$ a velocidade total do robô (translacional e rotacional).
-\\ Para procurarmos inconsistências nas velocidades dos motores (que indicam deslizamento nas rodas), partiremos da relação inicial dada por:
-\\ \\ $m = Dv$ \\ \\
-Como é possível notar, a matriz D não é quadrada, ela não possuui inversa, então não podemos, inicialmente, isolar o vetor "v", no entanto, podemos achar uma matriz equivalente, chamada de Matriz Pseudoinversa ($D^+$), que usaremos com intuito de isolar o vetor das velocidades Euclidianas.
+\\ \hspace{1cm} Para procurarmos inconsistências nas velocidades dos motores (que indicam deslizamento nas rodas), partiremos da relação inicial dada por:
+\[m = Dv\]
+\hspace{1cm}Como é possível notar, a matriz $D$ não é quadrada, ela não possuui inversa, então não podemos, inicialmente, isolar o vetor "$v$", no entanto, podemos achar uma matriz equivalente, chamada de Matriz Pseudoinversa ($D^+$), que usaremos com intuito de isolar o vetor das velocidades Euclidianas.
 \\ \\ Definição Pseudo-inversa (Moore-Penrose)
 
-De acordo com a definição pseudo-inversa de Moore-Penrose, vemos que se D tem seu espaço coluna LI, podemos calcular a sua inversa da seguinte maneira:
+De acordo com a definição pseudo-inversa de Moore-Penrose, vemos que se $D$ tem seu espaço coluna LI, podemos calcular a sua inversa da seguinte maneira:
 \\ \\ $D^+ = (D^*D)^{-1} D^*$
 
 Demonstração da propriedade:
 
-Daí usando a expressão anterior e multiplicando por D pela direita, temos:
+Daí usando a expressão anterior e multiplicando por $D$ pela direita, temos:
 \\ $D^+D = (D^*D)^{-1}(D^*D) = I => (D^+$ é a inversa a esquerda de D)  
 \\ \\ Aplicando a pseudo-inversa na equação inicial, obtemos:
 $ m = Dv => D^+m = D^+Dv => v = D^+m$
-\\ \\ Com a constante comunicação do robô e do controlador acerca da situação das velocidades dos motores, podemos sempre testar a inconsistência da matriz m, de modo que
+\\ \\ \hspace{1cm} Com a constante comunicação do robô e do controlador acerca da situação das velocidades dos motores, podemos sempre testar a inconsistência da matriz m, de modo que
 se as relações $m = Dv$ e $v = D^+m$ são válidas, então $m = DD^+m$ também o é. Para testar a consistência das velocidades, basta testar a validade da última expressão.
-\\ Caso essa igualdade não ocorra, podemos afirmar com certeza que alguma roda está com velocidade inconsistente e portanto, deslizando. Contudo, existe a possibilidade de que múltiplas rodas também estejam deslizando em uma taxa que faça com que a relação permaneça válida,
+\\ \hspace{1cm}Caso essa igualdade não ocorra, podemos afirmar com certeza que alguma roda está com velocidade inconsistente e portanto, deslizando. Contudo, existe a possibilidade de que múltiplas rodas também estejam deslizando em uma taxa que faça com que a relação permaneça válida,
 no entando, isto é extremamente improvável.
 
 Assim, vamos trabalhar testando a validade da expressão:
 \\ $ m = DD^+m => (I - DD^+m) = 0$
 \\ Para $\alpha = \pi/6$ e $\beta = \pi/4$, teremos a seguinte relação:
 \\ $(v1 - v2) = (v3 - v4)(sqrt{2/3})$
-\\ \\ Logo, se essa relação \textbf{não} for válida, alguma das rodas não está rodando da maneira correta.
+\\ \\ \hspace{1cm} Logo, se essa relação \textbf{não} for válida, alguma das rodas não está rodando da maneira correta.
 \subsection{Item 2}
-Para identificarmos uma possível perda ou desperdício de energia precisamos identificar como funciona o vetor aceleração do robô, dado por: 
+\hspace{1cm}Para identificarmos uma possível perda ou desperdício de energia precisamos identificar como funciona o vetor aceleração do robô, dado por: 
 $ a = C_{\alpha}f_{k}$ Partindo desse ponto, é fácil notar que existem combinações de forças dos motores que geram uma aceleração nula:
 $ a = 0 $, como o vetor: $f_{o} = \begin{pmatrix} 1,-1,1,-1\end{pmatrix}$. Em outras palavras, o vetor $f_{o}$ pertence ao núcleo de $C_{\alpha}$.
 \\ \\
-Essa interessante observação nos permite expandir o raciocínio para resolver o problema de desperdício de energia. Note que se um vetor $g$ pertence ao núcleo de $C_{\alpha}$, então qualquer combinação de vetores $f$ que inclua $g$
+\hspace{1cm}Essa interessante observação nos permite expandir o raciocínio para resolver o problema de desperdício de energia. Note que se um vetor $g$ pertence ao núcleo de $C_{\alpha}$, então qualquer combinação de vetores $f$ que inclua $g$
 produz a mesma aceleração que $f - g$, pois:\\
 \\  $ a = C_{\alpha}(f) = C_{\alpha}(f-g) + C_{\alpha}(g) = C_{\alpha}(f-g)$
 \\ \\
-Como calculado anteriormente na seção 3.1, $dim(C_{alpha}) = 3$, daí, aplicando o teorema do posto-nulidade para $C_{\alpha}$, temos:
+\hspace{1cm}Como calculado anteriormente na seção 3.1, $dim(C_{alpha}) = 3$, daí, aplicando o teorema do posto-nulidade para $C_{\alpha}$, temos:
 \\  \\ $ Rank(C_{\alpha}) + Ker(C_{\alpha}) = Dim(coluna)$ \\ \\
-Daí tiramos que $Ker(C_{\alpha}) = 1 $, e portanto qualquer vetor no núcleo de $C_{\alpha}$ é da forma $\lambda f_{k}$.
-\\ O fato interessante de se notar é que primeiro, testamos as validades das velocidades através da equação: $(I-DD^+)m = 0$
+\hspace{1cm}Daí tiramos que $Ker(C_{\alpha}) = 1 $, e portanto qualquer vetor no núcleo de $C_{\alpha}$ é da forma $\lambda f_{k}$.
+\\ \hspace{1cm}O fato interessante de se notar é que primeiro, testamos as validades das velocidades através da equação: $(I-DD^+)m = 0$
 e agora, concluímos que qualquer vetor no núcleo de $C_{\alpha}$ gera uma aceleração nula no robô. Podemos estreitar ainda mais essa relação,
 se usarmos o conceito de operador de projeção ortogonal:
-\\ \\ As matrizes $DD^+ e D^+D$ são operadores de projeção ortogonal, $P$ , ou seja, são hermitianos ($P = P^*$), por definição, e são idempotentes
+\\ \\ \hspace{1cm}As matrizes $DD^+ e D^+D$ são operadores de projeção ortogonal, $P$ , ou seja, são hermitianos ($P = P^*$), por definição, e são idempotentes
 ($P^2 = P$). Daí, as seguintes propriedades se seguem:
 \\ $DD^+$ é o operador de projeção ortogonal na $Im(D)$, e por consequência, $I - DD^+$ é o operador de projeção ortogonal em $ker(A)$.
-\\ \\ Se analisarmos as matrizes $C_{\alpha}$ e $D$, podemos notar que $C_{\alpha} = (1/{\alpha}M)(D^T)$, como nossas matrizes estão no corpo dos $R$, sabemos que $D^T = D^*$,
+\\ \\ \hspace{1cm} Se analisarmos as matrizes $C_{\alpha}$ e $D$, podemos notar que $C_{\alpha} = (1/{\alpha}M)(D^T)$, como nossas matrizes estão no corpo dos $R$, sabemos que $D^T = D^*$,
 então podemos ver que $C_{\alpha}$ é a matriz adjunta de $D$ multiplicada por uma constante!
-\\ Então, se quisermos corrigir o deslizamento de velocidades, verificando a consistência da equação $(I-DD^+)m = 0$, basta vermos que o operador $(I - DD^+)$ projeta $m$ no $ker(D^*)$,
+\\ \hspace{1cm}Então, se quisermos corrigir o deslizamento de velocidades, verificando a consistência da equação $(I-DD^+)m = 0$, basta vermos que o operador $(I - DD^+)$ projeta $m$ no $ker(D^*)$,
 logo a relação que queremos manter válida é que $m$ seja \textbf{ortogonal} ao vetor que compõem a base do $ker(C_{\alpha})$.
-\\ \\ Correção:
+\subsection{Correção}
 
-Podemos visualizar a correção de deslizamento, identificando o espaço vetorial da transformação $(I - DD^+)$.
+\hspace{1cm}Podemos visualizar a correção de deslizamento, identificando o espaço vetorial da transformação $(I - DD^+)$.
 Nesse espaço, de dimensão = 4, existe um subespaço tridimensional de valores consistentes, ou seja, que não deslizam. Ortogonalmente à esse subespaço,
 possuímos o vetor $f_{k}$, sempre que as rodas estão deslizando, estamos gastando energia, pois o vetor das velocidades contém uma componente na direção $f_{k}$.
 Daí, a nossa correção para velocidades inconsistentes gera, consequentemente, uma economia de energia para o sistema do robô.
-\\ \\ Além disso, quando mapeamos as acelerações Euclidianas $a$ com as forças dos motores $f$, sempre obtemos resultados consistentes, através da expressaõ:
+\\ \\\hspace{1cm} Além disso, quando mapeamos as acelerações Euclidianas $a$ com as forças dos motores $f$, sempre obtemos resultados consistentes, através da expressaõ:
 \\ $f = C_{\alpha}^+a$
-\\ Veja que $rank(C_{\alpha}) = 3$, então pelo teorema do posto-nulidade temos que: $ker(C_{\alpha}) = 0$. $C_{\alpha}$, portanto, mapeia as acelerações $a$  em $f$ (subespaço de 3 dimensões).
+\\ \hspace{1cm}Veja que $rank(C_{\alpha}) = 3$, então pelo teorema do posto-nulidade temos que: $ker(C_{\alpha}) = 0$. $C_{\alpha}$, portanto, mapeia as acelerações $a$  em $f$ (subespaço de 3 dimensões).
 Se esse espaço possuísse algum elemento $u$ do núcleo de $C_{\alpha}$, então deveria existir uma aceleração $a$, diferente de 0, tal que $u = C_{\alpha}^+a$. Como vimos anteriormente que $c_ {\alpha}u = a = 0$, chegaríamos a um absurdo.
 
 \section{Conclusão}
