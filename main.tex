@@ -6,6 +6,7 @@
 \usepackage{amsmath}
 \usepackage{float}
 \setlength{\parindent}{3em}
+\usepackage[a4paper,left=2.5cm,right=2.5cm,top=2.5cm,bottom=3.0cm]{geometry}
 
 \def\bkRsf{{\sf \mbox{\vrule height0.705em width0.06em
             depth0em}\kern-.04em R}}
@@ -188,7 +189,13 @@ Como é possível notar, a matriz $D$ não é quadrada e, por tanto, não possui
 
 \subsubsection{Definição Pseudo-inversa (Moore-Penrose)}
 
-\hspace{1cm} De acordo com a definição de pseudo-inversa de Moore-Penrose, vemos que, se $D$ tem seu espaço coluna LI, podemos calcular a sua inversa da seguinte maneira:
+\hspace{1cm} A Pseudoinversa $D^+$ é definida como a matriz que satisfaz os quatro seguintes critérios (condições de Moore-Penrose):
+\[DD^+D=D\]
+\[D^+DD^+=D^+\]
+\[(DD^+)^*=DD^+\]
+\[(D^+D)^*=D^+D\]
+
+No caso particular em que $D$ tem seu espaço coluna LI, podemos calcular a sua inversa da seguinte maneira:
 \[ D^+ = (D^*D)^{-1} D^*\]
 
 Assim, temos:
@@ -205,7 +212,7 @@ Assim, temos:
 \subsubsection{Demonstração da propriedade}
 
 \hspace{1cm} Assim, usando a expressão anterior e multiplicando por $D$ pela direita, temos:
-\[D^+D = (D^*D)^{-1}(D^*D) = I \Rightarrow (D^+ \text{ é a inversa a esquerda de }D)\]  
+\[D^+D = (D^*D)^{-1}(D^*D) = I \Rightarrow D^+ \text{ é a inversa a esquerda de }D\]  
 
 \subsubsection{Teste de velocidades inconsistentes}
 
@@ -231,7 +238,7 @@ Se $m$ for consistente, a igualdade ocorrerá. Caso não ocorra, podemos afirmar
 
 Para $\alpha = \pi/6$ e $\beta = \pi/4$, teremos a seguinte relação:
 \[0,2(v_1 - v_2) = 0,2449(v_4 - v_3)\]
-%%%%%%%%
+
 Logo, se essa relação \textbf{não} for válida, teremos identificado que há deslizamento no movimento do robô.
 
 \subsection{Item 2}
@@ -245,19 +252,19 @@ Logo, se essa relação \textbf{não} for válida, teremos identificado que há 
  \frac{1}{\alpha} & \frac{1}{\alpha} &\frac{1}{\alpha} & \frac{1}{\alpha}
  \end{pmatrix}
 \]
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%colocar matriz calpha
 
 Partindo desse ponto, é fácil notar que existem combinações de forças dos motores que geram uma aceleração nula: $ a = 0 $. Temos como exemplo o vetor: $f_{o} = \begin{pmatrix} -\sqrt{\frac{2}{3}},\sqrt{\frac{2}{3}},-1,1\end{pmatrix}$. Em outras palavras, o vetor $f_{o}$ pertence ao núcleo de $C_{\alpha}$.
 
 Essa interessante observação nos permite expandir o raciocínio para resolver o problema de desperdício de energia. Note que se um vetor $g$ pertence ao núcleo de $C_{\alpha}$, então qualquer combinação de vetores $f$ que inclua $g$ produz a mesma aceleração que $f - g$, pois:
 \[ a = C_{\alpha}(f) = C_{\alpha}(f-g) + C_{\alpha}(g) = C_{\alpha}(f-g)\]
 
-%%%%%%%%%Tal fato nos mostra 
+Assim, para uma aceleração $a$, existe uma única força tal que $f=C_{\alpha}a$. Como $f$ é sempre menor em módulo do que $f-g$ (porque $g$ é ortogonal ao subespaço de $f$), temos a situação onde gastasse menos energia. Conclui-se que os motores não desperdiçam energia quando forças do Núcleo de $C_{\alpha}$ são evitadas.
 
-Como calculado anteriormente na seção 3.1, $dim(C_{alpha}) = 3$, daí, aplicando o teorema do posto-nulidade para $C_{\alpha}$, temos:
-\[Rank(C_{\alpha}) + Ker(C_{\alpha}) = Dim(coluna)\]
-%%%% n tem a demo
-Daí tiramos que $Ker(C_{\alpha}) = 1 $, e portanto qualquer vetor no núcleo de $C_{\alpha}$ é da forma $\lambda f_{k}$.
+Como pode se verificar, $C_{alpha}$ possui 3 colunas LI. Assim, $dim(C_{alpha}) = 3$, daí, aplicando o teorema do posto-nulidade para $C_{\alpha}$, temos:
+\[Rank(C_{\alpha}) + Ker(C_{\alpha}) = \text{ número de colunas de }C_{alpha}\]
+
+
+Portanto $Ker(C_{\alpha}) = 1 $, e portanto qualquer vetor no núcleo de $C_{\alpha}$ é da forma $\lambda f_{k}$.
 
 O fato interessante de se notar é que primeiro, testamos as validades das velocidades através da equação: $(I-DD^+)m = 0$ e agora, concluímos que qualquer vetor no núcleo de $C_{\alpha}$ gera uma aceleração nula no robô. Podemos estreitar ainda mais essa relação, se usarmos o conceito de operador de projeção ortogonal:
 
@@ -267,7 +274,7 @@ $DD^+$ é o operador de projeção ortogonal na $Im(D)$, e por consequência, $I
 %%%%%%%%%%%
 Se analisarmos as matrizes $C_{\alpha}$ e $D$, podemos notar que $C_{\alpha} = (1/{\alpha}M)(D^T)$, como nossas matrizes estão no corpo dos $\bkRsf$, sabemos que $D^T = D^*$, então podemos ver que $C_{\alpha}$ é a matriz adjunta de $D$ multiplicada por uma constante!
 
-Então, concluimos que a transformação $(I-DD^+)$ projeta $m$ no $ker(D^*)$. Além disso, sabemos que $m$ é consistente se $(I-DD^+)m = 0$. Por tanto, chegamos que $m$ é consistente se é ortogonal ao vetor que compõem a base do $ker(C_{\alpha})$.
+Então, concluimos que a transformação $(I-DD^+)$ projeta $m$ no $ker(D^*)$. Além disso, sabemos que $m$ é consistente se $(I-DD^+)m = 0$. Portanto, chegamos que $m$ é consistente se é ortogonal ao vetor que compõe a base do $ker(C_{\alpha})$.
 
 \subsection{Correção do deslizamento}
 
