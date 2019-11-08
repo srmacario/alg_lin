@@ -154,7 +154,7 @@ Para tal, é necessário inverter a matriz $m=Dv$. Em geral, isso não é possí
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.4\textwidth]{sanhaço.jpg}
+\includegraphics[width=0.4\textwidth]{sanhaco.jpg}
 \caption{Geometria das rodas}
 \label{Figura 1}
 \end{figure}
@@ -258,7 +258,7 @@ Partindo desse ponto, é fácil notar que existem combinações de forças dos m
 Essa interessante observação nos permite expandir o raciocínio para resolver o problema de desperdício de energia. Note que se um vetor $g$ pertence ao núcleo de $C_{\alpha}$, então qualquer combinação de vetores $f$ que inclua $g$ produz a mesma aceleração que $f - g$, pois:
 \[ a = C_{\alpha}(f) = C_{\alpha}(f-g) + C_{\alpha}(g) = C_{\alpha}(f-g)\]
 
-Assim, para uma aceleração $a$, existe uma única força tal que $f=C_{\alpha}a$. Como $f$ é sempre menor em módulo do que $f-g$ (porque $g$ é ortogonal ao subespaço de $f$), temos a situação onde gastasse menos energia. Conclui-se que os motores não desperdiçam energia quando forças do Núcleo de $C_{\alpha}$ são evitadas.
+Assim, para uma aceleração $a$, existe uma única força tal que $f=C_{\alpha}^+a$. Como $f$ é sempre menor em módulo do que $f-g$ (porque $g$ é ortogonal ao subespaço de $f$), temos a situação onde gastasse menos energia. Conclui-se que os motores não desperdiçam energia quando forças do Núcleo de $C_{\alpha}$ são evitadas.
 
 Como pode se verificar, $C_{alpha}$ possui 3 colunas LI. Assim, $dim(C_{alpha}) = 3$, daí, aplicando o teorema do posto-nulidade para $C_{\alpha}$, temos:
 \[Rank(C_{\alpha}) + Ker(C_{\alpha}) = \text{ número de colunas de }C_{alpha}\]
@@ -278,9 +278,11 @@ Então, concluimos que a transformação $(I-DD^+)$ projeta $m$ no $ker(D^*)$. A
 
 \subsection{Correção do deslizamento}
 
-\hspace{1cm} Do que foi mostrado anteriormente, concluimos também que as velocidades dos motores são inconsistentes se existe uma projeção de $m$ na direção do vetor $f_k$ , que é base do espaço nulo de $C_{\alpha}$. Por tanto, para corrigir o deslizamento, nós calcularemos a projeção de $m$ na direção do vetor unitário $\frac{1}{2}f_k$ e subtrairemos essa projeção de $m$.
+\hspace{1cm} Do que foi mostrado anteriormente, concluimos também que as velocidades dos motores são inconsistentes se existe uma projeção de $m$ na direção do vetor $f_o$ , que é base do espaço nulo de $C_{\alpha}$. Por tanto, para corrigir o deslizamento, nós calcularemos a projeção de $m$ na direção do vetor unitário na direção de $f_{o}$ e subtrairemos essa projeção de $m$.
 
 Podemos visualizar a correção de deslizamento da seguinte maneira: o espaço vetorial de $m$ tem $\text{dimensão}= 4$. nesse espaço, existe um subespaço tridimensional (um hyperplano tridimensional) de valores consistentes, ou seja, que não deslizam. Ortogonalmente à esse subespaço ,possuímos o vetor $f_{k}$. Sempre que as rodas estão deslizando, estamos gastando energia, pois o vetor das velocidades contém uma componente na direção $f_{k}$.
+
+\[m_{corrigido} = m - (m . f_{o})f_{o}\]
 
 Daí, a nossa correção para velocidades inconsistentes gera, consequentemente, uma economia de energia para o sistema do robô.
 
