@@ -1,0 +1,10 @@
+\contentsline {section}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{2}
+\contentsline {subsection}{\numberline {1.1}Constitui\IeC {\c c}\IeC {\~a}o dos rob\IeC {\^o}s com rodas omnidirecionais}{2}
+\contentsline {subsection}{\numberline {1.2}Fundamentos F\IeC {\'\i }sicos}{3}
+\contentsline {section}{\numberline {2}Enunciado do problema}{5}
+\contentsline {subsection}{\numberline {2.1}Deslizamento de Rodas}{5}
+\contentsline {subsection}{\numberline {2.2}Economia de Energia}{5}
+\contentsline {section}{\numberline {3}Resolu\IeC {\c c}\IeC {\~a}o do problema}{5}
+\contentsline {subsection}{\numberline {3.1}Item 1}{5}
+\contentsline {subsection}{\numberline {3.2}Item 2}{6}
+\contentsline {section}{\numberline {4}Conclus\IeC {\~a}o}{8}
